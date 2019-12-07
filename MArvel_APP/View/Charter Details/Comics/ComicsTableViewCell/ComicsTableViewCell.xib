@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="3HF-2p-jP8">
-                        <rect key="frame" x="0.0" y="41" width="342" height="120"/>
+                        <rect key="frame" x="10" y="41" width="332" height="120"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cLO-kw-ASU">
                             <size key="itemSize" width="50" height="50"/>
@@ -41,9 +41,10 @@
                     <constraint firstItem="3HF-2p-jP8" firstAttribute="top" secondItem="BPV-6E-2Qw" secondAttribute="bottom" constant="10" id="bej-Hw-0Kd"/>
                     <constraint firstItem="BPV-6E-2Qw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="bi9-Yu-zow"/>
                     <constraint firstAttribute="trailing" secondItem="3HF-2p-jP8" secondAttribute="trailing" id="epp-gs-bnb"/>
-                    <constraint firstItem="3HF-2p-jP8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zQN-IR-msT"/>
+                    <constraint firstItem="3HF-2p-jP8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="zQN-IR-msT"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="MainCollectionViewCell" destination="3HF-2p-jP8" id="cGm-pf-qmu"/>

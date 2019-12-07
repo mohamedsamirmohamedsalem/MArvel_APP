@@ -20,9 +20,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="349" height="308"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="defaultCharcterImage" translatesAutoresizingMaskIntoConstraints="NO" id="9rE-7b-9El">
-                                <rect key="frame" x="0.0" y="0.0" width="349" height="255.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="349" height="245.5"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rue-xS-UCC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="rue-xS-UCC">
                                 <rect key="frame" x="0.0" y="255.5" width="349" height="52.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -37,7 +37,7 @@
                             <constraint firstAttribute="trailing" secondItem="rue-xS-UCC" secondAttribute="trailing" id="eC4-qf-F3U"/>
                             <constraint firstItem="rue-xS-UCC" firstAttribute="height" secondItem="4Wq-bF-KME" secondAttribute="height" multiplier="0.17" id="fKF-9f-nwa"/>
                             <constraint firstAttribute="bottom" secondItem="rue-xS-UCC" secondAttribute="bottom" id="ieJ-od-XyJ"/>
-                            <constraint firstItem="rue-xS-UCC" firstAttribute="top" secondItem="9rE-7b-9El" secondAttribute="bottom" id="o64-yY-yn8"/>
+                            <constraint firstItem="rue-xS-UCC" firstAttribute="top" secondItem="9rE-7b-9El" secondAttribute="bottom" constant="10" id="o64-yY-yn8"/>
                             <constraint firstAttribute="trailing" secondItem="9rE-7b-9El" secondAttribute="trailing" id="zUW-5O-MyZ"/>
                         </constraints>
                     </view>

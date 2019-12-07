@@ -65,6 +65,8 @@ class MarvelCharactersViewController: UIViewController {
                 self.mainStackView.isHidden = false
             }
             self.view.layoutIfNeeded()
+            //hide keyBoard
+            self.view.endEditing(true)
         }
     }
 ///////////////////////////////////////////////////////////////////////////////////
@@ -122,9 +124,7 @@ class MarvelCharactersViewController: UIViewController {
 
 
 extension MarvelCharactersViewController: UISearchBarDelegate{
-    /**
-     :nodoc:
-     */
+  
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         resignFirstResponder()
         activityIndicator.startAnimating()
@@ -134,9 +134,7 @@ extension MarvelCharactersViewController: UISearchBarDelegate{
             loadData()
         }
     }
-    /**
-     :nodoc:
-     */
+
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if searchBar.text!.isEmpty{
             cleanLoadDada()
@@ -144,12 +142,18 @@ extension MarvelCharactersViewController: UISearchBarDelegate{
             loadData()
         }
     }
-    /**
-     :nodoc:
-     */
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         if characters.count == 0 {
             cleanLoadDada()
         }
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        activityIndicator.startAnimating()
+              if let search = searchBar.text{
+                  characters = []
+                  nameSearch = search
+                  loadData()
+              }
     }
 }
