@@ -10,10 +10,9 @@ import UIKit
 
 class MarvelCharactersViewController: UIViewController {
     
-    
-    ///RequestCharacter
+      //MARK:- Instances
+       //RequestCharacter
        let requestCharacter = RequestCharacter()
-       ///DataSource de Character
        var characters: [Character] = []
        ///Flag indicativa de carregamento usada para endlessscroll
        var loadingCharacters = false
@@ -27,11 +26,8 @@ class MarvelCharactersViewController: UIViewController {
        var nameSearch = ""
 
        var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-       /**
-        :nodoc:
-        */
+///////////////////////////////////////////////////////////////////////////////
     //MARK:- IBOutlets
-    
     @IBOutlet var mainStackView: UIStackView!
     @IBOutlet var MainTableView: UITableView!
     @IBOutlet var searchStackView: UIStackView!
@@ -44,10 +40,6 @@ class MarvelCharactersViewController: UIViewController {
         loadData()
         setLayout()
         registerNibFiles()
-        if characters.count == 0{
-                   self.initActivityIndicator()
-               }
-        searchBar.delegate = self
     }
 ////////////////////////////////////////////////////////////////////////////////////
     //MARK:- IBActions
@@ -60,6 +52,7 @@ class MarvelCharactersViewController: UIViewController {
                 self.searchStackView.isHidden = false
                 self.mainStackView.isHidden = true
                 self.MainTableView.backgroundColor = #colorLiteral(red: 0.1515806438, green: 0.1632818436, blue: 0.1808670461, alpha: 1)
+                self.searchBar.becomeFirstResponder()
             }else{//  //Cancel Button Clicled
                 self.searchStackView.isHidden = true
                 self.mainStackView.isHidden = false
@@ -70,6 +63,26 @@ class MarvelCharactersViewController: UIViewController {
         }
     }
 ///////////////////////////////////////////////////////////////////////////////////
+    //MARK:- Methods
+    //this function to set the layouts of MarvelCharacters ViewController
+    private func setLayout(){
+        searchBar.delegate = self
+        self.searchStackView.isHidden = true
+        searchBar.backgroundImage = UIImage()
+        if characters.count == 0{
+            self.initActivityIndicator()
+        }
+    }
+    //This Funvtion to register cell in tableview
+    private func registerNibFiles(){
+        MainTableView.RegisterNib(Cell: MarvelCharactersTableViewCell.self)
+    }
+    
+    // present and move to CharacterDetails ViewController
+    func goToCharacterDetailsVC(){
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CharacterDetailsViewController") as! CharacterDetailsViewController
+        present(storyBoard, animated: true, completion: nil)
+    }
     
     func initActivityIndicator(){
         activityIndicator.center = self.view.center
@@ -98,62 +111,10 @@ class MarvelCharactersViewController: UIViewController {
               }
           }
       }
-    private func cleanLoadDada(){
+    
+     func cleanLoadDada(){
         characters = []
         nameSearch = ""
         loadData()
-    }
-    //MARK: Methods
-    
-    //this function to set the layouts of MarvelCharacters ViewController
-    private func setLayout(){
-        self.searchStackView.isHidden = true
-        searchBar.backgroundImage = UIImage()
-    }
-    //This Funvtion to register cell in tableview
-    private func registerNibFiles(){
-        MainTableView.RegisterNib(Cell: MarvelCharactersTableViewCell.self)
-    }
-    
-    // present and move to CharacterDetails ViewController
-    func goToCharacterDetailsVC(){
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CharacterDetailsViewController") as! CharacterDetailsViewController
-        present(storyBoard, animated: true, completion: nil)
-    }
-}
-
-
-extension MarvelCharactersViewController: UISearchBarDelegate{
-  
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        resignFirstResponder()
-        activityIndicator.startAnimating()
-        if let search = searchBar.text{
-            characters = []
-            nameSearch = search
-            loadData()
-        }
-    }
-
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        if searchBar.text!.isEmpty{
-            cleanLoadDada()
-        } else {
-            loadData()
-        }
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if characters.count == 0 {
-            cleanLoadDada()
-        }
-    }
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        activityIndicator.startAnimating()
-              if let search = searchBar.text{
-                  characters = []
-                  nameSearch = search
-                  loadData()
-              }
     }
 }

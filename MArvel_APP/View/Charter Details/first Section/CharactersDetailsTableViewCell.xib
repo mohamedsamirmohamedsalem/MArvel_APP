@@ -60,6 +60,11 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="characterDiscription" destination="4G2-5v-8iM" id="Y6T-Te-A4l"/>
+                <outlet property="characterImage" destination="HDr-50-KcX" id="oYS-ve-30i"/>
+                <outlet property="characterName" destination="VhV-58-CAb" id="cmN-1w-x7b"/>
+            </connections>
             <point key="canvasLocation" x="136" y="89"/>
         </tableViewCell>
     </objects>

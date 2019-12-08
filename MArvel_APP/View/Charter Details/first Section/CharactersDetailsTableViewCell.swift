@@ -11,6 +11,11 @@ import Foundation
 
 class CharactersDetailsTableViewCell: UITableViewCell {
 
+    //MARK:- IBOutlets
+    @IBOutlet var characterImage: UIImageView!
+    @IBOutlet var characterName: UILabel!
+    @IBOutlet var characterDiscription: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,6 +27,16 @@ class CharactersDetailsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    //MARK :- IBAction
+    //MARK :- Methods
+    func configureCell(with character: Character){
+           characterName.text = character.name
+           characterDiscription.text = character.description
+           if let url = URL(string: character.thumbnail.getUrl()){
+               characterImage.kf.indicatorType = .activity
+               characterImage.kf.setImage(with: url)
+           } else {
+               characterImage.image = UIImage(named: "no_avatar")
+           }
+       }
     
 }

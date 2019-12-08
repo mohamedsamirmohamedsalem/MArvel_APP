@@ -37,7 +37,6 @@ extension MarvelCharactersViewController : UITableViewDelegate , UITableViewData
     //this function set action for taping in cell (Delgate Method)
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //this for change backgroundColor of cell when select it
-        
         goToCharacterDetailsVC()
     }
     
