@@ -10,38 +10,38 @@ import UIKit
 
 class MarvelCharactersViewController: UIViewController {
     
-      //MARK:- Instances
-       //RequestCharacter
-       let requestCharacter = RequestCharacter()
-       var characters: [Character] = []
-       ///Flag indicativa de carregamento usada para endlessscroll
-       var loadingCharacters = false
-       ///Página atual usada para calculo do offset posteriormente
-       var currentPage = 0
-       ///Total de characters carregados
-       var total = 0
-       ///Armazena Character selecionado na tableView
-       var selectedCharacter: Character? = nil
-       ///name do character
-       var nameSearch = ""
-
-       var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-///////////////////////////////////////////////////////////////////////////////
+    //MARK:- Instances
+    //RequestCharacter
+    let requestCharacter = RequestCharacter()
+    var characters: [Character] = []
+    ///Flag indicativa de carregamento usada para endlessscroll
+    var loadingCharacters = false
+    ///Página atual usada para calculo do offset posteriormente
+    var currentPage = 0
+    ///Total de characters carregados
+    var total = 0
+    ///Armazena Character selecionado na tableView
+    var selectedCharacter: Character? = nil
+    ///name do character
+    var nameSearch = ""
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    ///////////////////////////////////////////////////////////////////////////////
     //MARK:- IBOutlets
     @IBOutlet var mainStackView: UIStackView!
     @IBOutlet var MainTableView: UITableView!
     @IBOutlet var searchStackView: UIStackView!
     @IBOutlet var searchTableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
-////////////////////////////////////////////////////////////////////////////
-
+    ////////////////////////////////////////////////////////////////////////////
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
         setLayout()
         registerNibFiles()
     }
-////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////
     //MARK:- IBActions
     
     //Show and hide the searchBar and marvel image
@@ -62,7 +62,7 @@ class MarvelCharactersViewController: UIViewController {
             self.view.endEditing(true)
         }
     }
-///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
     //MARK:- Methods
     //this function to set the layouts of MarvelCharacters ViewController
     private func setLayout(){
@@ -80,8 +80,17 @@ class MarvelCharactersViewController: UIViewController {
     
     // present and move to CharacterDetails ViewController
     func goToCharacterDetailsVC(){
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CharacterDetailsViewController") as! CharacterDetailsViewController
-        present(storyBoard, animated: true, completion: nil)
+        //        let storyBoard = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "CharacterDetailsViewController") as! CharacterDetailsViewController
+        //        present(storyBoard, animated: true, completion: nil)
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "CharacterDetailsViewController" {
+            if let destinetion = segue.destination as? CharacterDetailsViewController {
+                destinetion.characters = characters
+            }
+        }
     }
     
     func initActivityIndicator(){
@@ -92,27 +101,27 @@ class MarvelCharactersViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     
-     func loadData(){
-          loadingCharacters = true
-          requestCharacter.loadCharacters(name: nameSearch, page: currentPage) { (response) in
-              switch response {
-              case .success(let model):
-                  self.total = model.data.total
-                  self.characters.append(contentsOf: model.data.results)
-                  self.MainTableView.reloadData()
-                  self.activityIndicator.stopAnimating()
-                  self.loadingCharacters = false
-              case .serverError(let description):
-                  print("Server error: \(description) \n")
-              case .noConnection(let description):
-                  print("Server error noConnection: \(description) \n")
-              case .timeOut(let description):
-                  print("Server error timeOut: \(description) \n")
-              }
-          }
-      }
+    func loadData(){
+        loadingCharacters = true
+        requestCharacter.loadCharacters(name: nameSearch, page: currentPage) { (response) in
+            switch response {
+            case .success(let model):
+                self.total = model.data.total
+                self.characters.append(contentsOf: model.data.results)
+                self.MainTableView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.loadingCharacters = false
+            case .serverError(let description):
+                print("Server error: \(description) \n")
+            case .noConnection(let description):
+                print("Server error noConnection: \(description) \n")
+            case .timeOut(let description):
+                print("Server error timeOut: \(description) \n")
+            }
+        }
+    }
     
-     func cleanLoadDada(){
+    func cleanLoadDada(){
         characters = []
         nameSearch = ""
         loadData()
